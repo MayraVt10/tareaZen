@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToDoList - Inicio</title>
+    <title>ToDoList</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -29,6 +29,7 @@
                         <th>Estado</th>
                         <th>Fecha de Vencimiento</th>
                         <th>Tiempo Estimado</th>
+                        <th>Categoría</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -46,7 +47,7 @@
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>Agregar Tarea</h2>
+            <h2>Agregar/Modificar Tarea</h2>
             <form id="addTaskFormModal">
                 <label for="taskNameModal">Nombre de Tarea:</label>
                 <input type="text" id="taskNameModal" name="taskNameModal" required>
@@ -64,6 +65,30 @@
                 <label for="estimatedTimeModal">Tiempo Estimado:</label>
                 <input type="text" id="estimatedTimeModal" name="estimatedTimeModal" required>
 
+                <label for="categoryModal">Categoría:</label>
+                <select id="categoryModal" name="categoryModal">
+                    <option value="Casa">Casa</option>
+                    <option value="Trabajo">Trabajo</option>
+                    <option value="Universidad">Universidad</option>
+                    <option value="Colegio">Colegio</option>
+                    <!-- Aquí se agregarán dinámicamente las categorías -->
+                </select>
+
+                <button type="submit" id="submitButton">Agregar</button>
+                <button type="button" id="cancelButton" class="cancel-button">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="categoryModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Administrar Categorías</h2>
+            <div id="categoryList">
+                <!-- Aquí se agregarán dinámicamente las categorías -->
+            </div>
+            <form id="addCategoryForm">
+                <input type="text" id="newCategoryInput" placeholder="Nueva categoría" required>
                 <button type="submit">Agregar</button>
             </form>
         </div>
@@ -72,4 +97,3 @@
     <script src="tasks.js"></script>
 </body>
 </html>
-```
