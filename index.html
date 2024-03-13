@@ -37,12 +37,39 @@
                 </tbody>
             </table>
         </div>
-        <button id="addTaskButton" class="floating-button">+</button>
     </section>
 
     <footer>
-        <p>&copy; 2024 ToDoList. Todos los derechos reservados.</p>
+        <button id="addTaskButton" class="floating-button">+</button>
     </footer>
 
     <div id="modal" class="modal">
-     
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Agregar Tarea</h2>
+            <form id="addTaskFormModal">
+                <label for="taskNameModal">Nombre de Tarea:</label>
+                <input type="text" id="taskNameModal" name="taskNameModal" required>
+
+                <label for="taskStatusModal">Estado:</label>
+                <select id="taskStatusModal" name="taskStatusModal">
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="En Curso">En Curso</option>
+                    <option value="Completado">Completado</option>
+                </select>
+
+                <label for="dueDateModal">Fecha de Vencimiento:</label>
+                <input type="date" id="dueDateModal" name="dueDateModal" required>
+
+                <label for="estimatedTimeModal">Tiempo Estimado:</label>
+                <input type="text" id="estimatedTimeModal" name="estimatedTimeModal" required>
+
+                <button type="submit">Agregar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="tasks.js"></script>
+</body>
+</html>
+```
