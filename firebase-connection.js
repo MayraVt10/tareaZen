@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js';
-import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js';
+import { getFirestore, collection, addDoc, doc, getDocs, query, where } from 'https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js';
 
 // Configura Firebase Firestore
 const firebaseConfig = {
@@ -38,3 +38,30 @@ registerForm.addEventListener('submit', async (e) => {
     console.error('Error al registrar usuario.', error);
   }
 });
+
+// Maneja el evento de inicio de sesión
+loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+  
+    const username = loginForm['loginUsername'].value;
+    const password = loginForm['loginPassword'].value;
+  
+    try {
+        const q = query(collection(db, "users"), where("username", "==", username));
+        
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            console.log(doc.id, " => ", doc.data());
+            if(doc.data().username == username && doc.data().password == password){
+                location.replace("./index.html")
+            } else{
+                console.log('Usuario o contraseña incorrecto(s).');
+            }
+        });
+    }
+    catch (error) {
+      console.error("Error al buscar usuario en Firestore:", error);
+      loginError.textContent = "Error al buscar usuario";
+    }
+  });
+  
