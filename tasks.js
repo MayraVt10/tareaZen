@@ -1,142 +1,115 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Función para listar las tareas
-    function renderTasks(tasks) {
-        const taskList = document.getElementById("taskList");
-        taskList.innerHTML = ""; // Limpiar la lista antes de volver a renderizar
+// Arreglo de tareas (simulado, puedes reemplazarlo con una base de datos)
+let tasks = [];
 
-        tasks.forEach(task => {
-            const taskItem = document.createElement("tr");
-            taskItem.innerHTML = `
-                <td>${task.name}</td>
-                <td>${task.status}</td>
-                <td>${task.dueDate}</td>
-                <td>${task.estimatedTime}</td>
-                <td>${task.category}</td>
-                <td>
-                    <button class="modify-task" data-id="${task.id}">✎</button>
-                    <button class="delete-task" data-id="${task.id}">🗑</button>
-                </td>
-            `;
-            taskList.appendChild(taskItem);
-        });
-    }
+// Función para abrir el formulario de tarea
+function openTaskForm() {
+  document.getElementById("task-modal").style.display = "block";
+}
 
-    // Ejemplo de datos de tarea (puedes reemplazarlos con tus propios datos)
-    let tasks = [
-        { id: 1, name: "Tarea 1", status: "En Curso", dueDate: "2024-03-15", estimatedTime: "2 horas", category: "Trabajo" },
-        { id: 2, name: "Tarea 2", status: "Completado", dueDate: "2024-03-20", estimatedTime: "3 horas", category: "Casa" }
-    ];
+// Función para cerrar el formulario de tarea
+function closeTaskForm() {
+  document.getElementById("task-modal").style.display = "none";
+}
 
-    // Renderizar las tareas al cargar la página
-    renderTasks(tasks);
+// Función para agregar una nueva tarea
+function addTask(event) {
+  event.preventDefault(); // Evitar el envío del formulario
+  
+  // Obtener valores del formulario
+  const name = document.getElementById("task-name").value;
+  const status = document.getElementById("task-status").value;
+  const dueDate = document.getElementById("task-due-date").value;
+  const estimatedTime = document.getElementById("task-estimated-time").value;
+  const category = document.getElementById("task-category").value;
+  const priority = document.getElementById("task-priority").value;
+  
+  // Crear objeto tarea
+  const task = {
+    name: name,
+    status: status,
+    dueDate: dueDate,
+    estimatedTime: estimatedTime,
+    category: category,
+    priority: priority
+  };
+  
+  // Agregar tarea al arreglo
+  tasks.push(task);
+  
+  // Limpiar el formulario
+  document.getElementById("task-form").reset();
+  
+  // Renderizar la tabla de tareas
+  renderTasks();
 
-    // Obtener y renderizar las categorías disponibles
-    const categorySelect = document.getElementById("categoryModal");
-    const categories = tasks.reduce((acc, curr) => {
-        if (!acc.includes(curr.category)) {
-            acc.push(curr.category);
-        }
-        return acc;
-    }, []);
+  // Cerrar el formulario
+  closeTaskForm();
+}
 
-    categories.forEach(category => {
-        const option = document.createElement("option");
-        option.value = category;
-        option.textContent = category;
-        categorySelect.appendChild(option);
-    });
+// Función para renderizar las tareas en la tabla
+function renderTasks() {
+  const tableBody = document.querySelector("#task-table tbody");
+  tableBody.innerHTML = ""; // Limpiar contenido anterior
+  
+  tasks.forEach((task, index) => {
+    const row = tableBody.insertRow(); // Insertar fila en la tabla
+    
+    // Insertar celdas con los datos de la tarea
+    row.insertCell().textContent = task.name;
+    row.insertCell().textContent = task.status;
+    row.insertCell().textContent = task.dueDate;
+    row.insertCell().textContent = task.estimatedTime;
+    row.insertCell().textContent = task.category;
+    row.insertCell().textContent = task.priority;
+    
+    // Insertar celda con botones de acciones
+    const actionsCell = row.insertCell();
+    const editButton = document.createElement("button");
+    editButton.textContent = "Editar";
+    editButton.addEventListener("click", () => editTask(index));
+    actionsCell.appendChild(editButton);
+    
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Eliminar";
+    deleteButton.addEventListener("click", () => deleteTask(index));
+    actionsCell.appendChild(deleteButton);
+  });
+}
 
-    // Agregar tarea
-    const addTaskButton = document.getElementById("addTaskButton");
-    const modal = document.getElementById("modal");
-    const closeButton = document.querySelector(".close");
-    const addTaskFormModal = document.getElementById("addTaskFormModal");
+// Función para editar una tarea
+function editTask(index) {
+  // Obtener la tarea a editar
+  const task = tasks[index];
+  
+  // Llenar el formulario con los datos de la tarea
+  document.getElementById("task-name").value = task.name;
+  document.getElementById("task-status").value = task.status;
+  document.getElementById("task-due-date").value = task.dueDate;
+  document.getElementById("task-estimated-time").value = task.estimatedTime;
+  document.getElementById("task-category").value = task.category;
+  document.getElementById("task-priority").value = task.priority;
+  
+  // Mostrar el formulario de edición
+  openTaskForm();
+  
+  // Eliminar la tarea original del arreglo
+  tasks.splice(index, 1);
+  
+  // Renderizar la tabla de tareas actualizada
+  renderTasks();
+}
 
-    addTaskButton.addEventListener("click", function() {
-        modal.style.display = "block";
-        document.getElementById("submitButton").innerText = "Agregar";
-        document.getElementById("addTaskFormModal").reset();
-        document.getElementById("addTaskFormModal").dataset.mode = "add"; // Modo de agregar tarea
-    });
+// Función para eliminar una tarea
+function deleteTask(index) {
+  // Eliminar la tarea del arreglo
+  tasks.splice(index, 1);
+  
+  // Renderizar la tabla de tareas actualizada
+  renderTasks();
+}
 
-    closeButton.addEventListener("click", function() {
-        modal.style.display = "none";
-    });
+// Inicialización: Renderizar las tareas existentes
+renderTasks();
 
-    window.addEventListener("click", function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    });
-
-    addTaskFormModal.addEventListener("submit", function(event) {
-        event.preventDefault();
-
-        const taskName = document.getElementById("taskNameModal").value;
-        const taskStatus = document.getElementById("taskStatusModal").value;
-        const dueDate = document.getElementById("dueDateModal").value;
-        const estimatedTime = document.getElementById("estimatedTimeModal").value;
-        const category = document.getElementById("categoryModal").value;
-        const mode = addTaskFormModal.dataset.mode; // Obtener el modo (agregar o modificar)
-
-        if (mode === "add") { // Modo de agregar tarea
-            const taskId = tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1;
-
-            const newTask = {
-                id: taskId,
-                name: taskName,
-                status: taskStatus,
-                dueDate: dueDate,
-                estimatedTime: estimatedTime,
-                category: category
-            };
-
-            tasks.push(newTask);
-        } else if (mode === "edit") { // Modo de modificar tarea
-            const taskId = parseInt(addTaskFormModal.dataset.taskId); // Obtener el ID de la tarea a modificar
-
-            const taskIndex = tasks.findIndex(task => task.id === taskId);
-            tasks[taskIndex] = {
-                ...tasks[taskIndex], // Mantener los valores anteriores de la tarea
-                name: taskName,
-                status: taskStatus,
-                dueDate: dueDate,
-                estimatedTime: estimatedTime,
-                category: category
-            };
-        }
-
-        renderTasks(tasks);
-        modal.style.display = "none";
-    });
-
-    // Modificar tarea
-    const taskList = document.getElementById("taskList");
-    taskList.addEventListener("click", function(event) {
-        if (event.target.classList.contains("modify-task")) {
-            const taskId = parseInt(event.target.getAttribute("data-id"));
-            const taskToModify = tasks.find(task => task.id === taskId);
-
-            // Llenar el formulario con los detalles de la tarea seleccionada
-            document.getElementById("taskNameModal").value = taskToModify.name;
-            document.getElementById("taskStatusModal").value = taskToModify.status;
-            document.getElementById("dueDateModal").value = taskToModify.dueDate;
-            document.getElementById("estimatedTimeModal").value = taskToModify.estimatedTime;
-            document.getElementById("categoryModal").value = taskToModify.category;
-
-            modal.style.display = "block";
-            document.getElementById("submitButton").innerText = "Modificar";
-            document.getElementById("addTaskFormModal").dataset.mode = "edit"; // Modo de modificar tarea
-            document.getElementById("addTaskFormModal").dataset.taskId = taskId; // ID de la tarea a modificar
-        }
-    });
-
-    // Eliminar tarea
-    taskList.addEventListener("click", function(event) {
-        if (event.target.classList.contains("delete-task")) {
-            const taskId = parseInt(event.target.getAttribute("data-id"));
-            tasks = tasks.filter(task => task.id !== taskId);
-            renderTasks(tasks);
-        }
-    });
-});
+// Event listener para el envío del formulario
+document.getElementById("task-form").addEventListener("submit", addTask);

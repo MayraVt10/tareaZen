@@ -1,99 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToDoList</title>
-    <link rel="stylesheet" href="styles/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TareaZen</title>
+  <link rel="icon" href="images/icono.jpg" type="image/png">
+  <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-    <header>
-        <h1>ToDoList</h1>
-        <nav>
-            <ul>
-                <li><a href="#" id="tasksTab">Tareas</a></li>
-                <li><a href="#" id="reportsTab">Reportes</a></li>
-                <li><a href="#" id="accountTab">Cuenta</a></li>
-                <li><a href="#" id="logout">Cerrar Sesión</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <section id="tasksSection" class="main-content">
-        <h2>Tareas</h2>
-        <div id="taskTableContainer">
-            <table id="taskTable">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Estado</th>
-                        <th>Fecha de Vencimiento</th>
-                        <th>Tiempo Estimado</th>
-                        <th>Categoría</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="taskList">
-                    <!-- Aquí se agregarán dinámicamente las tareas -->
-                </tbody>
-            </table>
-        </div>
-    </section>
+<nav>
+  <ul>
+    <li><a href="index.html">Tareas</a></li>
+    <li><a href="#">Reportes</a></li>
+    <li><a href="login.html">Cerrar Sesión</a></li>
+  </ul>
+</nav>
 
-    <footer>
-        <button id="addTaskButton" class="floating-button">+</button>
-    </footer>
+<table id="task-table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Estado</th>
+      <th>Fecha de Vencimiento</th>
+      <th>Tiempo Estimado</th>
+      <th>Categoría</th>
+      <th>Prioridad</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Aquí se añadirán las filas de tareas dinámicamente -->
+  </tbody>
+</table>
 
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Agregar/Modificar Tarea</h2>
-            <form id="addTaskFormModal">
-                <label for="taskNameModal">Nombre de Tarea:</label>
-                <input type="text" id="taskNameModal" name="taskNameModal" required>
+<button id="add-task-btn" class="float-btn" onclick="openTaskForm()">+</button>
 
-                <label for="taskStatusModal">Estado:</label>
-                <select id="taskStatusModal" name="taskStatusModal">
-                    <option value="Pendiente">Pendiente</option>
-                    <option value="En Curso">En Curso</option>
-                    <option value="Completado">Completado</option>
-                </select>
+<div id="task-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeTaskForm()">&times;</span>
+    <h2>Agregar Tarea</h2>
+    <form id="task-form">
+      <label for="task-name">Nombre:</label><br>
+      <input type="text" id="task-name" name="task-name"><br>
+      <label for="task-status">Estado:</label><br>
+      <select id="task-status" name="task-status">
+        <option value="Pendiente">Pendiente</option>
+        <option value="En curso">En curso</option>
+        <option value="Completado">Completado</option>
+      </select><br>
+      <label for="task-due-date">Fecha de Vencimiento:</label><br>
+      <input type="date" id="task-due-date" name="task-due-date"><br>
+      <label for="task-estimated-time">Tiempo Estimado:</label><br>
+      <input type="text" id="task-estimated-time" name="task-estimated-time"><br>
+      <label for="task-category">Categoría:</label><br>
+      <select id="task-category" name="task-category">
+        <option value="Casa">Casa</option>
+        <option value="Colegio">Colegio</option>
+        <option value="Universidad">Universidad</option>
+        <option value="Trabajo">Trabajo</option>
+        <option value="Otro">Otro</option>
+      </select><br>
+      <label for="task-priority">Prioridad:</label><br>
+      <select id="task-priority" name="task-priority">
+        <option value="Alta">Alta</option>
+        <option value="Media">Media</option>
+        <option value="Baja">Baja</option>
+      </select><br>
+      <input type="submit" value="Agregar">
+    </form>
+  </div>
+</div>
 
-                <label for="dueDateModal">Fecha de Vencimiento:</label>
-                <input type="date" id="dueDateModal" name="dueDateModal" required>
+<footer>
+  <!-- Aquí puedes añadir información adicional o enlaces -->
+</footer>
 
-                <label for="estimatedTimeModal">Tiempo Estimado:</label>
-                <input type="text" id="estimatedTimeModal" name="estimatedTimeModal" required>
-
-                <label for="categoryModal">Categoría:</label>
-                <select id="categoryModal" name="categoryModal">
-                    <option value="Casa">Casa</option>
-                    <option value="Trabajo">Trabajo</option>
-                    <option value="Universidad">Universidad</option>
-                    <option value="Colegio">Colegio</option>
-                    <!-- Aquí se agregarán dinámicamente las categorías -->
-                </select>
-
-                <button type="submit" id="submitButton">Agregar</button>
-                <button type="button" id="cancelButton" class="cancel-button">Cancelar</button>
-            </form>
-        </div>
-    </div>
-
-    <div id="categoryModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Administrar Categorías</h2>
-            <div id="categoryList">
-                <!-- Aquí se agregarán dinámicamente las categorías -->
-            </div>
-            <form id="addCategoryForm">
-                <input type="text" id="newCategoryInput" placeholder="Nueva categoría" required>
-                <button type="submit">Agregar</button>
-            </form>
-        </div>
-    </div>
-
-    <script src="tasks.js"></script>
+<script src="tasks.js"></script>
 </body>
 </html>
