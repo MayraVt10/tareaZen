@@ -2,69 +2,67 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-  }
+}
   
-  .navbar {
-    background-color: #22091f; /* Color de fondo */
-    padding: 15px 30px; /* Espaciado interno */
+.navbar {
+    background-color: #22091f;
+    padding: 15px 30px;
     display: flex;
-    justify-content: space-between; /* Distribuye los elementos a los extremos */
-    align-items: center; /* Alinea verticalmente los elementos */
-    font-size:  20px;
-  }
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+}
   
-  .navbar-left {
+.navbar-left {
     display: flex;
     align-items: center;
     padding: 20px 60px;
-    color: #d6cfcf;/* Tamaño del texto */
-  }
+    color: #d6cfcf;
+}
   
-  .navbar-left img {
-    width: 30px; /* Ajusta el tamaño del logo */
-    margin-right: 20px; /* Espacio entre el logo y el texto */
-   
-  }
+.navbar-left img {
+    width: 30px;
+    margin-right: 20px;
+}
   
-  .navbar-right {
+.navbar-right {
     list-style-type: none;
     margin: 0;
     padding: 15px 20px;
-  }
+}
   
-  .navbar-right li {
+.navbar-right li {
     display: inline;
-  }
+}
   
-  .navbar-right li a {
-    color: #fff; /* Color del texto */
+.navbar-right li a {
+    color: #fff;
     text-decoration: none;
-    margin-left: 20px; /* Espacio entre las opciones */
+    margin-left: 20px;
     padding: 10px;
-  }
+}
   
-  .navbar-right li a:hover {
-    color: #dcc5c5; /* Color del texto al pasar el mouse */
-  }
+.navbar-right li a:hover {
+    color: #dcc5c5;
+}
   
-  
-  .float-btn {
+.float-btn {
     position: fixed;
     bottom: 20px;
     right: 40px;
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background-color: #22091f; /* Guindo */
+    background-color: #22091f;
     color: #fff;
     font-size: 40px;
     text-align: center;
     border: none;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+}
   
-  .modal {
+.modal {
     display: none;
     position: fixed;
     z-index: 1;
@@ -74,94 +72,86 @@ body {
     height: 100%;
     background-color: rgba(0,0,0,0.4);
     overflow: auto;
-  }
+}
   
-  /* Resto de estilos */
-
-  .modal-content {
+.modal-content {
     background-color: #fefefe;
-    margin: 10% auto; /* 10% desde la parte superior y centrado */
+    margin: 10% auto;
     padding: 25px;
     border: 1px solid #888;
-    width: 50% !important;  /* Ancho del formulario al 50% */
+    width: 50% !important;
     border-radius: 20px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 18px;
 }
 
-  
-  /* Resto de estilos */
-  
-  
-  .close-btn {
+.close-btn {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
-  }
+}
   
-  .close-btn:hover,
-  .close-btn:focus {
+.close-btn:hover,
+.close-btn:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
-  }
-  
+}
 
-  
-  #task-table {
+#task-table {
     margin: 10px auto;
-    width: 80%; /* Asegura que la tabla ocupe el ancho completo del contenedor */
+    width: 70%;
     border-collapse: collapse;
     border-radius: 20px;
     overflow: hidden;
-    margin-bottom: 20px; /* Agrega un espacio entre la tabla y el siguiente elemento */
+    margin-bottom: 20px;
     background-color: #c0b1a1;
-  }
+}
   
-  #task-table th, #task-table td {
+#task-table th, #task-table td {
     padding: 10px;
     text-align: center;
     border-bottom: 1px solid #ddd;
-  }
+}
   
-  #task-table th {
+#task-table th {
     background-color: #762b47;
     color: #fff;
-  }
+}
   
-  #task-table tbody tr:last-child td {
+#task-table tbody tr:last-child td {
     border-bottom: none;
-  }
+}
   
-  #task-table button {
+#task-table button {
     background-color: transparent;
     border: none;
     cursor: pointer;
     font-size:'16px';
     color: #333;
-  }
+}
   
-  #task-table button:hover {
-    color: #22091f; /* Guindo */
-  }
+#task-table button:hover {
+    color: #22091f;
+}
   
-  .icon-pencil:before {
-    content: "\270E"; /* Icono lápiz */
-  }
+.icon-pencil:before {
+    content: "\270E";
+}
   
-  .icon-trash:before {
-    content: "\1F5D1"; /* Icono basurero */
-  }
+.icon-trash:before {
+    content: "\1F5D1";
+}
   
-  #task-form label {
+#task-form label {
     display: block;
     margin-bottom: 10px;
-  }
+}
   
-  #task-form input[type="text"],
-  #task-form input[type="date"],
-  #task-form select {
+#task-form input[type="text"],
+#task-form input[type="date"],
+#task-form select {
     width: calc(100% - 20px);
     padding: 10px;
     margin-bottom: 20px;
@@ -169,18 +159,18 @@ body {
     border-radius: 5px;
     font-family: inherit;
     font-size: 16px;
-  }
+}
   
-  #task-form select {
+#task-form select {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg width='10' height='5' viewBox='0 0 10 5' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.25L5 4.75L9 1.25' stroke='%23000000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: calc(100% - 10px) center;
-  }
+}
   
-  #task-form input[type="submit"] {
+#task-form input[type="submit"] {
     width: calc(100% - 20px);
     padding: 10px;
     background-color: #22091f;
@@ -190,9 +180,38 @@ body {
     cursor: pointer;
     font-family: inherit;
     font-size: 16px;
-  }
+}
   
-  #task-form input[type="submit"]:hover {
+#task-form input[type="submit"]:hover {
     background-color: #22091f;
-  }
-  
+}
+
+/* Estilos para los controles de filtro */
+.filter-container {
+    margin: 20px 0 0  20px;
+    display: flex;
+    align-items: left;
+    flex-wrap: wrap;
+    font-size: 18px;
+    line-height: 40px;
+}
+
+.filter-container label {
+    margin-right: 10px;
+}
+
+.filter-container select,
+.filter-container input[type="date"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.filter-container select {
+    min-width: 120px;
+}
+
+.filter-container input[type="date"] {
+    width: 150px;
+}

@@ -12,77 +12,108 @@
 <body>
 
     <nav class="navbar">
-        <div class="navbar-left">
-          <img src="images/icono.jpg" alt="Logo de TareaZen">
-          <h2>TareaZen</h2>
-        </div>
-        <ul class="navbar-right">
-          <li><a href="index.html">Tareas</a></li>
-          <li><a href="#">Reportes</a></li>
-          <li><a href="login.html">Cerrar Sesión</a></li>
-        </ul>
-      </nav>
-      
-
-<table id="task-table">
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Estado</th>
-      <th>Fecha de Vencimiento</th>
-      <th>Tiempo Estimado</th>
-      <th>Categoría</th>
-      <th>Prioridad</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Aquí se añadirán las filas de tareas dinámicamente -->
-  </tbody>
-</table>
-
-<button id="add-task-btn" class="float-btn" onclick="openTaskForm()">+</button>
-
-<div id="task-modal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn" onclick="closeTaskForm()">&times;</span>
-    <h2>Agregar Tarea</h2>
-    <form id="task-form">
-      <label for="task-name">Nombre:</label><br>
-      <input type="text" id="task-name" name="task-name"><br>
-      <label for="task-status">Estado:</label><br>
-      <select id="task-status" name="task-status">
+      <div class="navbar-left">
+        <img src="images/icono.jpg" alt="Logo de TareaZen">
+        <h2>TareaZen</h2>
+      </div>
+      <ul class="navbar-right">
+        <li><a href="index.html">Tareas</a></li>
+        <li><a href="#">Reportes</a></li>
+        <li><a href="login.html">Cerrar Sesión</a></li>
+      </ul>
+    </nav>
+  
+    <div class="filter-container">
+      <label for="status-filter">Filtrar por Estado:</label>
+      <select id="status-filter">
+        <option value="">Todos</option>
         <option value="Pendiente">Pendiente</option>
         <option value="En curso">En curso</option>
         <option value="Completado">Completado</option>
-      </select><br>
-      <label for="task-due-date">Fecha de Vencimiento:</label><br>
-      <input type="date" id="task-due-date" name="task-due-date"><br>
-      <label for="task-estimated-time">Tiempo Estimado:</label><br>
-      <input type="text" id="task-estimated-time" name="task-estimated-time"><br>
-      <label for="task-category">Categoría:</label><br>
-      <select id="task-category" name="task-category">
+      </select>
+  
+      <label for="due-date-filter">Filtrar por Fecha de Vencimiento:</label>
+      <input type="date" id="due-date-filter">
+  
+      <label for="category-filter">Filtrar por Categoría:</label>
+      <select id="category-filter">
+        <option value="">Todos</option>
         <option value="Casa">Casa</option>
         <option value="Colegio">Colegio</option>
         <option value="Universidad">Universidad</option>
         <option value="Trabajo">Trabajo</option>
         <option value="Otro">Otro</option>
-      </select><br>
-      <label for="task-priority">Prioridad:</label><br>
-      <select id="task-priority" name="task-priority">
+      </select>
+  
+      <label for="priority-filter">Filtrar por Prioridad:</label>
+      <select id="priority-filter">
+        <option value="">Todos</option>
         <option value="Alta">Alta</option>
         <option value="Media">Media</option>
         <option value="Baja">Baja</option>
-      </select><br>
-      <input type="submit" value="Agregar">
-    </form>
-  </div>
-</div>
-
-<footer>
-  <!-- Aquí puedes añadir información adicional o enlaces -->
-</footer>
-
-<script src="tasks.js"></script>
-</body>
+      </select>
+    </div>
+    <br>
+    <table id="task-table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Estado</th>
+          <th>Fecha de Vencimiento</th>
+          <th>Tiempo Estimado</th>
+          <th>Categoría</th>
+          <th>Prioridad</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Aquí se añadirán las filas de tareas dinámicamente -->
+      </tbody>
+    </table>
+  
+    <button id="add-task-btn" class="float-btn" onclick="openTaskForm()">+</button>
+  
+    <div id="task-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeTaskForm()">&times;</span>
+        <h2>Agregar Tarea</h2>
+        <form id="task-form">
+          <label for="task-name">Nombre:</label><br>
+          <input type="text" id="task-name" name="task-name"><br>
+          <label for="task-status">Estado:</label><br>
+          <select id="task-status" name="task-status">
+            <option value="Pendiente">Pendiente</option>
+            <option value="En curso">En curso</option>
+            <option value="Completado">Completado</option>
+          </select><br>
+          <label for="task-due-date">Fecha de Vencimiento:</label><br>
+          <input type="date" id="task-due-date" name="task-due-date"><br>
+          <label for="task-estimated-time">Tiempo Estimado:</label><br>
+          <input type="text" id="task-estimated-time" name="task-estimated-time"><br>
+          <label for="task-category">Categoría:</label><br>
+          <select id="task-category" name="task-category">
+            <option value="Casa">Casa</option>
+            <option value="Colegio">Colegio</option>
+            <option value="Universidad">Universidad</option>
+            <option value="Trabajo">Trabajo</option>
+            <option value="Otro">Otro</option>
+          </select><br>
+          <label for="task-priority">Prioridad:</label><br>
+          <select id="task-priority" name="task-priority">
+            <option value="Alta">Alta</option>
+            <option value="Media">Media</option>
+            <option value="Baja">Baja</option>
+          </select><br>
+          <input type="submit" value="Agregar">
+        </form>
+      </div>
+    </div>
+  
+    <footer>
+      <!-- Aquí puedes añadir información adicional o enlaces -->
+    </footer>
+  
+    <script src="tasks.js"></script>
+  </body>
+  
 </html>

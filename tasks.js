@@ -108,8 +108,78 @@ function deleteTask(index) {
   renderTasks();
 }
 
+// Función para filtrar las tareas según los criterios seleccionados
+function filterTasks() {
+  const statusFilter = document.getElementById("status-filter").value;
+  const dueDateFilter = document.getElementById("due-date-filter").value;
+  const categoryFilter = document.getElementById("category-filter").value;
+  const priorityFilter = document.getElementById("priority-filter").value;
+
+  const filteredTasks = tasks.filter(task => {
+    // Filtrar por estado
+    if (statusFilter && task.status !== statusFilter) {
+      return false;
+    }
+
+    // Filtrar por fecha de vencimiento
+    if (dueDateFilter && task.dueDate !== dueDateFilter) {
+      return false;
+    }
+
+    // Filtrar por categoría
+    if (categoryFilter && task.category !== categoryFilter) {
+      return false;
+    }
+
+    // Filtrar por prioridad
+    if (priorityFilter && task.priority !== priorityFilter) {
+      return false;
+    }
+
+    return true;
+  });
+
+  renderFilteredTasks(filteredTasks);
+}
+
+// Función para renderizar las tareas filtradas en la tabla
+function renderFilteredTasks(filteredTasks) {
+  const tableBody = document.querySelector("#task-table tbody");
+  tableBody.innerHTML = ""; // Limpiar contenido anterior
+  
+  filteredTasks.forEach((task, index) => {
+    const row = tableBody.insertRow(); // Insertar fila en la tabla
+    
+    // Insertar celdas con los datos de la tarea
+    row.insertCell().textContent = task.name;
+    row.insertCell().textContent = task.status;
+    row.insertCell().textContent = task.dueDate;
+    row.insertCell().textContent = task.estimatedTime;
+    row.insertCell().textContent = task.category;
+    row.insertCell().textContent = task.priority;
+    
+    // Insertar celda con botones de acciones
+    const actionsCell = row.insertCell();
+    const editButton = document.createElement("button");
+    editButton.textContent = "Editar";
+    editButton.addEventListener("click", () => editTask(tasks.indexOf(task)));
+    actionsCell.appendChild(editButton);
+    
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Eliminar";
+    deleteButton.addEventListener("click", () => deleteTask(tasks.indexOf(task)));
+    actionsCell.appendChild(deleteButton);
+  });
+}
+
 // Inicialización: Renderizar las tareas existentes
 renderTasks();
 
 // Event listener para el envío del formulario
 document.getElementById("task-form").addEventListener("submit", addTask);
+
+// Event listener para los cambios en los filtros
+document.getElementById("status-filter").addEventListener("change", filterTasks);
+document.getElementById("due-date-filter").addEventListener("change", filterTasks);
+document.getElementById("category-filter").addEventListener("change", filterTasks);
+document.getElementById("priority-filter").addEventListener("change", filterTasks);
