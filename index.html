@@ -6,8 +6,8 @@
   <title>TareaZen</title>
   <link rel="icon" href="images/icono.jpg" type="image/png">
   <link rel="stylesheet" href="styles/styles.css">
+  <script type="module" src="js/tasks.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  
 </head>
 <body>
 
@@ -108,12 +108,69 @@
         </form>
       </div>
     </div>
-  
-    <footer>
-      <!-- Aquí puedes añadir información adicional o enlaces -->
-    </footer>
-  
-    <script src="tasks.js"></script>
+
+    <div id="task-edit-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeEditTaskForm()">&times;</span>
+        <h2>Editar Tarea</h2>
+        <form id="task-edit-form">
+          <label for="task-edit-id">ID:</label>
+          <input type="text" id="task-edit-id" name="task-id" readonly><br>
+          <label for="task-edit-name">Nombre:</label><br>
+          <input type="text" id="task-edit-name" name="task-name"><br>
+          <label for="task-edit-status">Estado:</label><br>
+          <select id="task-edit-status" name="task-status">
+            <option value="Pendiente">Pendiente</option>
+            <option value="En curso">En curso</option>
+            <option value="Completado">Completado</option>
+          </select><br>
+          <label for="task-edit-due-date">Fecha de Vencimiento:</label><br>
+          <input type="date" id="task-edit-due-date" name="task-due-date"><br>
+          <label for="task-edit-estimated-time">Tiempo Estimado:</label><br>
+          <input type="text" id="task-edit-estimated-time" name="task-estimated-time"><br>
+          <label for="task-edit-category">Categoría:</label><br>
+          <select id="task-edit-category" name="task-category">
+            <option value="Casa">Casa</option>
+            <option value="Colegio">Colegio</option>
+            <option value="Universidad">Universidad</option>
+            <option value="Trabajo">Trabajo</option>
+            <option value="Otro">Otro</option>
+          </select><br>
+          <label for="task-edit-priority">Prioridad:</label><br>
+          <select id="task-edit-priority" name="task-priority">
+            <option value="Alta">Alta</option>
+            <option value="Media">Media</option>
+            <option value="Baja">Baja</option>
+          </select><br>
+          <input type="submit" value="Editar">
+        </form>
+      </div>
+    </div>
   </body>
-  
+
+  <script>
+    function openTaskForm() {
+      document.getElementById("task-modal").style.display = "block";
+    }
+
+    function closeTaskForm() {
+      document.getElementById("task-modal").style.display = "none";
+    }
+
+    function openEditTaskForm(task) {
+      document.getElementById('task-edit-id').value = task.id;
+      document.getElementById('task-edit-name').value = task.name;
+      document.getElementById('task-edit-status').value = task.status;
+      document.getElementById('task-edit-due-date').value = task.dueDate;
+      document.getElementById('task-edit-estimated-time').value = task.estimatedTime;
+      document.getElementById('task-edit-category').value = task.category;
+      document.getElementById('task-edit-priority').value = task.priority;
+
+      document.getElementById("task-edit-modal").style.display = "block";
+    }
+
+    function closeEditTaskForm() {
+      document.getElementById("task-edit-modal").style.display = "none";
+    }
+  </script>
 </html>

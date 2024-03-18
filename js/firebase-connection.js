@@ -20,7 +20,7 @@ const db = getFirestore(app);
 
 console.log('Conexion a Firebase establecida correctamente.');
 
-// Obtén referencias a los formularios y mensajes de error
+// Obtencion de referencias a los formularios y mensajes de error
 const registerForm = document.getElementById('registerForm');
 
 // Maneja el evento de registro de usuario
@@ -64,4 +64,3 @@ loginForm.addEventListener('submit', async (e) => {
       loginError.textContent = "Error al buscar usuario";
     }
   });
-  
