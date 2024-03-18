@@ -1,11 +1,11 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Lato', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
 }
   
 .navbar {
-    background-color: #22091f;
+    background-color: #6B9080;
     padding: 15px 30px;
     display: flex;
     justify-content: space-between;
@@ -53,7 +53,7 @@ body {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background-color: #22091f;
+    background-color: #6B9080;
     color: #fff;
     font-size: 40px;
     text-align: center;
@@ -106,7 +106,7 @@ body {
     border-radius: 20px;
     overflow: hidden;
     margin-bottom: 20px;
-    background-color: #c0b1a1;
+    background-color: #EAF4F4;
 }
   
 #task-table th, #task-table td {
@@ -116,7 +116,7 @@ body {
 }
   
 #task-table th {
-    background-color: #762b47;
+    background-color: #6B9080;
     color: #fff;
 }
   
@@ -173,7 +173,7 @@ body {
 #task-form input[type="submit"] {
     width: calc(100% - 20px);
     padding: 10px;
-    background-color: #22091f;
+    background-color: #6B9080;
     color: #fff;
     border: none;
     border-radius: 5px;
